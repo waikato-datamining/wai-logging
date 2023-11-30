@@ -26,14 +26,15 @@ def str_to_logging_level(level: str) -> int:
     :return: the int level
     :rtype: int
     """
+    level = level.upper()
+    if level == LOGGING_WARN:
+        level = LOGGING_WARNING
     if level not in LOGGING_LEVELS:
         raise Exception("Invalid logging level (%s): %s" % ("|".join(LOGGING_LEVELS), level))
     if level == LOGGING_CRITICAL:
         return logging.CRITICAL
     elif level == LOGGING_ERROR:
         return logging.ERROR
-    elif level == LOGGING_WARN:
-        return logging.WARNING
     elif level == LOGGING_WARNING:
         return logging.WARNING
     elif level == LOGGING_INFO:
