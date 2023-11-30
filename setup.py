@@ -1,4 +1,4 @@
-from setuptools import setup, find_namespace_packages
+from setuptools import setup
 
 
 def _read(f) -> bytes:
@@ -29,9 +29,8 @@ setup(
     package_dir={
         '': 'src'
     },
-    packages=find_namespace_packages(where="src"),
-    namespace_packages=[
-        "wai"
+    packages=[
+        "wai.logging",
     ],
     version="0.0.1",
     author='Peter Reutemann',
