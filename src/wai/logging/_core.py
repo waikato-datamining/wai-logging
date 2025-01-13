@@ -1,5 +1,6 @@
 import logging
 import os
+from typing import List, Any
 
 
 LOGGING_DEBUG = "DEBUG"
@@ -15,6 +16,11 @@ LOGGING_LEVELS = [
     LOGGING_ERROR,
     LOGGING_CRITICAL,
 ]
+
+
+SIMPLE_LOG_FORMAT = "%(levelname)s:%(name)s:%(message)s"
+
+TIMESTAMP_LOG_FORMAT = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 
 
 def str_to_logging_level(level: str) -> int:
@@ -45,7 +51,8 @@ def str_to_logging_level(level: str) -> int:
         raise Exception("Unhandled logging level: %s" % level)
 
 
-def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None):
+def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stream: Any = None, filename: str = None,
+                 handlers: List[Any] = None, log_format: str = SIMPLE_LOG_FORMAT):
     """
     Initializes the logging.
 
@@ -53,12 +60,29 @@ def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None):
     :type default_level: str
     :param env_var: the environment variable to check for a level (overrides the default level), ignored if None
     :type env_var: str
+    :param stream: the stream to use, uses stderr if None (default: None); cannot be used together with 'filename'
+    :param filename: the filename to log to, ignored if None (default: None); cannot be used together with 'stream'
+    :type filename: str
+    :param handlers: the explicit handlers to use
+    :type handlers: list
+    :param log_format: the format string for the logging output
+    :type log_format: str
     """
     level = str_to_logging_level(default_level)
     if env_var is not None:
         if os.getenv(env_var) is not None:
             level = str_to_logging_level(os.getenv(env_var))
-    logging.basicConfig(level=level)
+    if handlers is None:
+        handlers = []
+        if filename is not None:
+            handlers.append(logging.FileHandler(filename))
+        handlers.append(logging.StreamHandler(stream=stream))
+    else:
+        if stream is not None:
+            raise Exception("Cannot specify 'handlers' and 'stream' together!")
+        if filename is not None:
+            raise Exception("Cannot specify 'handlers' and 'filename' together!")
+    logging.basicConfig(level=level, handlers=handlers, format=log_format)
 
 
 def set_logging_level(logger: logging.Logger, level: str):
