@@ -26,7 +26,7 @@ Steps:
 
 * start new release (version: `vX.Y.Z`)
 * enter release notes, i.e., significant changes since last release
-* upload `wai.logging-X.Y.Z.tar.gz` previously generated with `setup.py`
+* upload `wai_logging-X.Y.Z.tar.gz` previously generated with `setup.py`
 * publish
 
 

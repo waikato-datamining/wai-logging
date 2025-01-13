@@ -13,7 +13,7 @@ def _read(f) -> bytes:
 
 
 setup(
-    name="wai.logging",
+    name="wai_logging",
     description="Python library with helper methods for logging.",
     long_description=(
         _read('DESCRIPTION.rst') + b'\n' +
@@ -32,7 +32,7 @@ setup(
     packages=[
         "wai.logging",
     ],
-    version="0.0.2",
+    version="0.0.3",
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
 )

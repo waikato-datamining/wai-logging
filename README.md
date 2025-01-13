@@ -7,7 +7,7 @@ Simple helper library for logging.
 From PyPI:
 
 ```bash
-pip install wai.logging
+pip install wai_logging
 ```
 
 From Github:
