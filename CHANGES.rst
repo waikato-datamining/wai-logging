@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.0.5 (????-??-??)
+------------------
+
+- `add_logging_level` method now allows specifying the `destination` in the parsed namespace
+- `add_logger_name` method now allows specifying the `destination` in the parse namespace,
+  and either short or long option flag can be specified
+
+
 0.0.4 (2025-08-25)
 ------------------
 
