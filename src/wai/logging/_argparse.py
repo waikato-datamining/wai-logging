@@ -39,7 +39,7 @@ def add_logging_level(parser: argparse.ArgumentParser, short_opt: Optional[str] 
 
 
 def add_logger_name(parser: argparse.ArgumentParser, short_opt: str = "-N", long_opt: str = "--logger_name",
-                    dest: str = "logging_name", default_name: str = None, help_str: str = None):
+                    dest: str = "logger_name", default_name: str = None, help_str: str = None):
     """
     Adds an option for the logger name to the parser.
     Only one of the two must be supplied: short_opt or long_opt.
