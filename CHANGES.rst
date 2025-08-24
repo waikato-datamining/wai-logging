@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.0.4 (????-??-??)
+------------------
+
+- `add_logging_level` method no longer requires short and long option flag to be specified together,
+  one of them can be omitted (ie None)
+
+
 0.0.3 (2025-01-14)
 ------------------
 
