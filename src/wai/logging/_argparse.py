@@ -1,7 +1,7 @@
 import argparse
 from typing import Optional
 
-from ._core import LOGGING_LEVELS, LOGGING_WARN
+from ._core import LOGGING_LEVELS, LOGGING_WARNING, LOGGING_WARN
 
 
 DEFAULT_LOGGING_LEVEL_HELP = "The logging level to use."
@@ -10,7 +10,7 @@ DEFAULT_LOGGER_NAME_HELP = "The custom name to use for the logger."
 
 def add_logging_level(parser: argparse.ArgumentParser, short_opt: Optional[str] = "-l",
                       long_opt: Optional[str] = "--logging_level", dest: str = "logging_level",
-                      help_str: str = None):
+                      help_str: str = None, default_level: str = LOGGING_WARNING):
     """
     Adds an option for the logging level to the parser.
     Only one of the two must be supplied: short_opt or long_opt.
@@ -25,17 +25,25 @@ def add_logging_level(parser: argparse.ArgumentParser, short_opt: Optional[str] 
     :type dest: str
     :param help_str: the help string to use
     :type help_str: str
+    :param default_level: the default level to use
+    :type default_level: str
     """
     if help_str is None:
         help_str = DEFAULT_LOGGING_LEVEL_HELP
+    if default_level is None:
+        default_level = LOGGING_WARNING
+    if default_level is LOGGING_WARN:
+        default_level = LOGGING_WARNING
+    if default_level not in LOGGING_LEVELS:
+        raise Exception("Unsupported logging level!")
     if (short_opt is None) and (long_opt is None):
         raise Exception("Either short or long option must be supplied at least!")
     elif (short_opt is not None) and (long_opt is not None):
-        parser.add_argument(short_opt, long_opt, dest=dest, choices=LOGGING_LEVELS, default=LOGGING_WARN, help=help_str)
+        parser.add_argument(short_opt, long_opt, dest=dest, choices=LOGGING_LEVELS, default=default_level, help=help_str)
     elif short_opt is not None:
-        parser.add_argument(short_opt, dest=dest, choices=LOGGING_LEVELS, default=LOGGING_WARN, help=help_str)
+        parser.add_argument(short_opt, dest=dest, choices=LOGGING_LEVELS, default=default_level, help=help_str)
     else:
-        parser.add_argument(long_opt, dest=dest, choices=LOGGING_LEVELS, default=LOGGING_WARN, help=help_str)
+        parser.add_argument(long_opt, dest=dest, choices=LOGGING_LEVELS, default=default_level, help=help_str)
 
 
 def add_logger_name(parser: argparse.ArgumentParser, short_opt: str = "-N", long_opt: str = "--logger_name",
