@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.6 (????-??-??)
+0.0.6 (2026-06-29)
 ------------------
 
 - `add_logging_level` method now allows specifying the `default_level`
