@@ -106,3 +106,32 @@ The output:
 INFO:my.test:info output
 WARNING:my.test:warning output
 ```
+
+### Example 4
+
+The following adds the logging level option to an `argparse` parser:
+
+```python
+import argparse
+import logging
+from wai.logging import init_logging, set_logging_level, add_logging_level
+
+logger = logging.getLogger("tool-with-logging")
+init_logging()
+parser = argparse.ArgumentParser(
+    description="Tool with logging option.",
+    prog="tool-with-logging",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-i", "--input", type=str, help="Input parameter", required=False, nargs="+")
+add_logging_level(parser)
+parsed = parser.parse_args()
+set_logging_level(logger, parsed.logging_level)
+logger.info("Input: %s" % str(parsed.input))
+```
+
+The above code, when executed with the `-l INFO` option, will output something 
+like this:
+
+```
+INFO:tool-with-logging:Input: None
+```
