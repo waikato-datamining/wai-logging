@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.0.7 (????-??-??)
+------------------
+
+- added level `FATAL`
+- added `logging_level_to_str` to turn int level into string representation
+
+
 0.0.6 (2026-06-29)
 ------------------
 

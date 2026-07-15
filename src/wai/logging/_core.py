@@ -9,12 +9,14 @@ LOGGING_WARN = "WARN"
 LOGGING_WARNING = "WARNING"
 LOGGING_ERROR = "ERROR"
 LOGGING_CRITICAL = "CRITICAL"
+LOGGING_FATAL = "FATAL"
 LOGGING_LEVELS = [
     LOGGING_DEBUG,
     LOGGING_INFO,
     LOGGING_WARNING,
     LOGGING_ERROR,
     LOGGING_CRITICAL,
+    LOGGING_FATAL,
 ]
 
 
@@ -49,6 +51,29 @@ def str_to_logging_level(level: str) -> int:
         return logging.DEBUG
     else:
         raise Exception("Unhandled logging level: %s" % level)
+
+
+def logging_level_to_str(level: int) -> str:
+    """
+    Turns the logging level value into the corresponding string representation.
+
+    :param level:
+    :return:
+    """
+    if level == logging.DEBUG:
+        return LOGGING_DEBUG
+    elif level == logging.INFO:
+        return LOGGING_INFO
+    elif level == logging.WARNING:
+        return LOGGING_WARNING
+    elif level == logging.ERROR:
+        return LOGGING_ERROR
+    elif level == logging.CRITICAL:
+        return LOGGING_CRITICAL
+    elif level == logging.FATAL:
+        return LOGGING_FATAL
+    else:
+        raise Exception("Unhandled logging level: %d" % level)
 
 
 def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stream: Any = None, filename: str = None,
