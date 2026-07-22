@@ -1,4 +1,4 @@
 from ._core import LOGGING_LEVELS, LOGGING_DEBUG, LOGGING_INFO, LOGGING_WARN, LOGGING_WARNING, LOGGING_ERROR, LOGGING_CRITICAL, LOGGING_FATAL
 from ._core import SIMPLE_LOG_FORMAT, TIMESTAMP_LOG_FORMAT
-from ._core import init_logging, set_logging_level, str_to_logging_level, logging_level_to_str
+from ._core import init_logging, set_logging_level, str_to_logging_level, logging_level_to_str, log
 from ._argparse import add_logging_level, add_logger_name, DEFAULT_LOGGING_LEVEL_HELP, DEFAULT_LOGGER_NAME_HELP

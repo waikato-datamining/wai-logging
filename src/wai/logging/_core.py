@@ -120,3 +120,49 @@ def set_logging_level(logger: logging.Logger, level: str):
     :type level: str
     """
     logger.setLevel(str_to_logging_level(level))
+
+
+def log(level: int = logging.INFO, msg: str = None, log_file: str = None, logger: logging.Logger = None):
+    """
+    Outputs the message to the log file and the logger instance.
+
+    :param level: the level to use for logging
+    :type level: int
+    :param msg: the message to output
+    :type msg: str
+    :param log_file: the log file to append
+    :type log_file: str
+    :param logger: the logger instance
+    :type logger: logging.Logger
+    """
+    if msg is None:
+        return
+    if logger is not None:
+        if not logger.isEnabledFor(level):
+            return
+
+    if logger is not None:
+        if level == logging.INFO:
+            logger.info(msg)
+        elif level == logging.DEBUG:
+            logger.debug(msg)
+        elif level == logging.WARNING:
+            logger.warning(msg)
+        elif level == logging.ERROR:
+            logger.error(msg)
+        elif level == logging.CRITICAL:
+            logger.critical(msg)
+        elif level == logging.FATAL:
+            logger.fatal(msg)
+
+    if log_file is not None:
+        level_str = logging_level_to_str(level)
+        try:
+            with open(log_file, "a") as fp:
+                fp.write(level_str + ":" + msg + "\n")
+        except:
+            msg = "Failed to write to log file: %s" % log_file
+            if logger is None:
+                print(msg)
+            else:
+                logger.error(msg)

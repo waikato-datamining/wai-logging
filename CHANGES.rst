@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.0.8 (2026-07-23)
+------------------
+
+- added `log` method for outputting message via logger and to a specific log file (independent of logger setup)
+
+
 0.0.7 (2026-07-16)
 ------------------
 
