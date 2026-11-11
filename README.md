@@ -21,9 +21,12 @@ pip install git+https://github.com/waikato-datamining/wai-logging.git
 
 The following helper methods are available:
 
-* `init_logging` - initializes the logging with a default level, which can be overridden with an environment variable
+* `init_logging` - initializes the logging with a default level, which can be 
+  overridden with an environment variable, logging format and filename to log 
+  the output to can be specified as well (and overridden with environment variables)
 * `set_logging_level` - sets the logging level of a `logging.Logger` instance
-* `str_to_logging_level` - turns a string logging level into a `logging` module one, used by `init_logging` and `set_logging_level`
+* `str_to_logging_level` - turns a string logging level into a `logging` module one, 
+  used by `init_logging` and `set_logging_level`
 * `logging_level_to_str` - turns an int logging level into its string representation
 * `add_logging_level` - adds an option for the logging level to an `argparse.ArgumentParser` instance
 * `add_logger_name` - adds an option for a custom name for a logger to an `argparse.ArgumentParser` instance
