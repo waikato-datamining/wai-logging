@@ -76,8 +76,9 @@ def logging_level_to_str(level: int) -> str:
         raise Exception("Unhandled logging level: %d" % level)
 
 
-def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stream: Any = None, filename: str = None,
-                 handlers: List[Any] = None, log_format: str = SIMPLE_LOG_FORMAT):
+def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stream: Any = None, handlers: List[Any] = None,
+                 filename: str = None, filename_env_var: str = None,
+                 log_format: str = SIMPLE_LOG_FORMAT, log_format_env_var: str = None):
     """
     Initializes the logging.
 
@@ -86,17 +87,24 @@ def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stre
     :param env_var: the environment variable to check for a level (overrides the default level), ignored if None
     :type env_var: str
     :param stream: the stream to use, uses stderr if None (default: None); cannot be used together with 'filename'
-    :param filename: the filename to log to, ignored if None (default: None); cannot be used together with 'stream'
-    :type filename: str
     :param handlers: the explicit handlers to use
     :type handlers: list
+    :param filename: the filename to log to, ignored if None (default: None); cannot be used together with 'stream'
+    :type filename: str
+    :param filename_env_var: the environment variable to specify the filename to redirect the logging output to, overrides 'filename' parameter, ignored if None
+    :type filename_env_var: str
     :param log_format: the format string for the logging output
     :type log_format: str
+    :param log_format_env_var: the environment variable that contains the logging format, overriding 'log_format' parameter, ignored if None
+    :type log_format_env_var: str
     """
     level = str_to_logging_level(default_level)
     if env_var is not None:
         if os.getenv(env_var) is not None:
             level = str_to_logging_level(os.getenv(env_var))
+    if filename_env_var is not None:
+        if os.getenv(filename_env_var) is not None:
+            filename = os.getenv(filename_env_var)
     if handlers is None:
         handlers = []
         if filename is not None:
@@ -107,6 +115,9 @@ def init_logging(default_level: str = LOGGING_WARNING, env_var: str = None, stre
             raise Exception("Cannot specify 'handlers' and 'stream' together!")
         if filename is not None:
             raise Exception("Cannot specify 'handlers' and 'filename' together!")
+    if log_format_env_var is not None:
+        if os.getenv(log_format_env_var) is not None:
+            log_format = os.getenv(log_format_env_var)
     logging.basicConfig(level=level, handlers=handlers, format=log_format)
 
 

@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.0.9 (????-??-??)
+------------------
+
+- added the `log_format_env_var` parameter to `init_logging` that allows overriding the logging format
+  via this environment variable, to make it easy to change the format a runtime, e.g., for temporary
+  debugging
+- added the `filename_env_var` parameter to `init_logging` for overriding the filename to redirect the
+  logging output to, e.g., for temporary turning on debugging output
+
+
 0.0.8 (2026-07-23)
 ------------------
 
