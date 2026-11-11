@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.9 (????-??-??)
+0.0.9 (2026-11-11)
 ------------------
 
 - added the `log_format_env_var` parameter to `init_logging` that allows overriding the logging format

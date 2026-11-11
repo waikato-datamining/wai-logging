@@ -21,7 +21,6 @@ setup(
     url="https://github.com/waikato-datamining/wai-logging",
     classifiers=[
         'Development Status :: 4 - Beta',
-        'License :: OSI Approved :: MIT License',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Programming Language :: Python :: 3',
     ],
@@ -32,7 +31,7 @@ setup(
     packages=[
         "wai.logging",
     ],
-    version="0.0.8",
+    version="0.0.9",
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
 )
